@@ -1,0 +1,19 @@
+amends "package://github.com/jdx/hk/releases/download/v1.37.0/hk@1.37.0#/Config.pkl"
+
+local linters = new Mapping<String, Step> {
+    ["secrets"] {
+        check = "betterleaks git --staged --no-banner"
+        exclusive = true
+    }
+}
+
+hooks {
+    ["pre-commit"] {
+        fix = true
+        stash = "git"
+        steps = linters
+    }
+    ["check"] {
+        steps = linters
+    }
+}
