@@ -2,3 +2,7 @@
 "github:betterleaks/betterleaks" = "latest"
 hk = "latest"
 pkl = "latest"
+
+[tasks.scan-secrets]
+description = "Deep scan full git history for secrets"
+run = "betterleaks git --no-banner --verbose"
