@@ -12,5 +12,5 @@ PLUGIN.description = "Eclipse JDT Language Server (jdtls) for Java LSP support"
 PLUGIN.minRuntimeVersion = "0.3.0"
 PLUGIN.manifestUrl = "https://github.com/tinnet/vfox-jdtls/releases/download/manifest/manifest.json"
 PLUGIN.notes = {
-  "Requires Java 21+ and Python 3 on PATH",
+	"Requires Java 21+ and Python 3 on PATH",
 }

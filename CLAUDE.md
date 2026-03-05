@@ -39,6 +39,7 @@ The Eclipse download server renders HTML directory listings with **single-quoted
 ```bash
 hk check                # Run pre-commit linters manually
 mise run scan-secrets    # Deep scan full git history for secrets
+mise run format         # Format Lua source code (alias: fmt)
 ```
 
 ### Local testing

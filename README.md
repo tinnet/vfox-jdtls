@@ -43,6 +43,15 @@ vfox use jdtls@1.57.0
 
 Eclipse publishes jdtls tarballs with build timestamps in the filename (e.g., `jdt-language-server-1.57.0-202602261110.tar.gz`). This plugin resolves the timestamp by scraping the [milestones directory](https://download.eclipse.org/jdtls/milestones/) at install time.
 
+## Development
+
+```bash
+# Format Lua source code
+mise run format
+# or
+mise run fmt
+```
+
 ## Publishing
 
 Push a tag matching `vX.Y.Z` to trigger CI that packages and publishes the plugin.

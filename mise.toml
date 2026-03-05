@@ -2,7 +2,13 @@
 "github:betterleaks/betterleaks" = "latest"
 hk = "latest"
 pkl = "latest"
+stylua = "latest"
 
 [tasks.scan-secrets]
 description = "Deep scan full git history for secrets"
 run = "betterleaks git --no-banner --verbose"
+
+[tasks.format]
+description = "Format Lua source code"
+run = "stylua ."
+alias = "fmt"

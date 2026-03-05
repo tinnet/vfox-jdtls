@@ -5,6 +5,10 @@ local linters = new Mapping<String, Step> {
         check = "betterleaks git --staged --no-banner"
         exclusive = true
     }
+    ["stylua"] {
+        check = "stylua --check ."
+        fix = "stylua ."
+    }
 }
 
 hooks {
