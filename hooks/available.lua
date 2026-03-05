@@ -27,9 +27,18 @@ function PLUGIN:Available(ctx)
 		end
 	end
 
-	-- Sort descending (newest first)
+	-- Sort descending (newest first) using numeric semver comparison
+	local function semver_gt(va, vb)
+		local a1, a2, a3 = va:match("(%d+)%.(%d+)%.(%d+)")
+		local b1, b2, b3 = vb:match("(%d+)%.(%d+)%.(%d+)")
+		a1, a2, a3 = tonumber(a1), tonumber(a2), tonumber(a3)
+		b1, b2, b3 = tonumber(b1), tonumber(b2), tonumber(b3)
+		if a1 ~= b1 then return a1 > b1 end
+		if a2 ~= b2 then return a2 > b2 end
+		return a3 > b3
+	end
 	table.sort(deduped, function(a, b)
-		return a.version > b.version
+		return semver_gt(a.version, b.version)
 	end)
 
 	return deduped
