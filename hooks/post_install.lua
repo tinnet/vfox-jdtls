@@ -1,12 +1,7 @@
---- Extension point, called after PreInstall, can perform additional operations,
---- such as file operations for the SDK installation directory or compile source code
---- Currently can be left unimplemented!
+--- Called after installation. Removes Windows-only config directories.
+--- @param ctx table
+--- @field ctx.rootPath string SDK installation directory
 function PLUGIN:PostInstall(ctx)
-    --- ctx.rootPath SDK installation directory
-    local rootPath = ctx.rootPath
-    local sdkInfo = ctx.sdkInfo['sdk-name']
-    local path = sdkInfo.path
-    local version = sdkInfo.version
-    local name = sdkInfo.name
-    local note = sdkInfo.note
+  local rootPath = ctx.rootPath
+  os.execute("rm -rf " .. rootPath .. "/config_win " .. rootPath .. "/config_win_arm")
 end

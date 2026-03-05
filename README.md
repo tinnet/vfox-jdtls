@@ -1,15 +1,48 @@
-# vfox-plugin-template
+# vfox-jdtls
 
-This is a [vfox plugin](https://vfox.dev/plugins/create/howto.html) template with CI that package and publish the plugin.
+[vfox](https://vfox.dev) / [mise](https://mise.jdx.dev) plugin for installing [Eclipse JDT Language Server](https://github.com/eclipse-jdtls/eclipse.jdt.ls) (jdtls).
 
-## Usage
+## Prerequisites
 
-1. [Generate](https://github.com/version-fox/vfox-plugin-template/generate) a new repository based on this template.
-2. Configure [metadata](https://github.com/version-fox/vfox-plugin-template/blob/main/metadata.lua) information
-3. To develop your plugin further, please read [the plugins create section of the docs](https://vfox.dev/plugins/create/howto.html).
+- **Java 21+** on PATH
+- **Python 3** on PATH (used by the `jdtls` launcher script)
 
+## Usage with mise
 
-## How to publish?
+```bash
+# Install a specific version
+mise use vfox:tinnet/vfox-jdtls@1.57.0
 
-1. Push a new tag to the repository which name is `vX.Y.Z` (X.Y.Z is the version number).
-2. The CI will automatically package, then publish [release](https://github.com/version-fox/vfox-plugin-template/releases/tag/v0.0.1) and publish [manifest](https://github.com/version-fox/vfox-plugin-template/releases/tag/manifest).
+# List available versions
+mise ls-remote vfox:tinnet/vfox-jdtls
+
+# Verify installation
+mise which jdtls
+jdtls --help
+```
+
+## Usage with vfox
+
+```bash
+# Add the plugin
+vfox add --source https://github.com/tinnet/vfox-jdtls/releases/download/manifest/manifest.json jdtls
+
+# Install a version
+vfox install jdtls@1.57.0
+vfox use jdtls@1.57.0
+```
+
+## Environment variables
+
+| Variable      | Value                          |
+|---------------|--------------------------------|
+| `JDTLS_HOME`  | SDK installation directory     |
+| `PATH`         | `$JDTLS_HOME/bin` is prepended |
+
+## How it works
+
+Eclipse publishes jdtls tarballs with build timestamps in the filename (e.g., `jdt-language-server-1.57.0-202602261110.tar.gz`). This plugin resolves the timestamp by scraping the [milestones directory](https://download.eclipse.org/jdtls/milestones/) at install time.
+
+## Publishing
+
+Push a tag matching `vX.Y.Z` to trigger CI that packages and publishes the plugin.
