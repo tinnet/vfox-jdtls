@@ -46,11 +46,17 @@ Eclipse publishes jdtls tarballs with build timestamps in the filename (e.g., `j
 ## Development
 
 ```bash
+# Run unit tests (Zero-dependency Lua runner)
+mise run test
+
 # Format Lua source code
 mise run format
 # or
 mise run fmt
 ```
+
+### Testing
+This project uses a lightweight, zero-dependency testing suite located in the `spec/` directory. We avoid external frameworks like `Busted` or `LuaUnit` to ensure the development environment remains portable and easy to set up without requiring `luarocks` or complex Homebrew builds.
 
 ## Publishing
 

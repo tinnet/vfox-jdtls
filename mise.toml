@@ -12,3 +12,7 @@ run = "betterleaks git --no-banner --verbose"
 description = "Format Lua source code"
 run = "stylua ."
 alias = "fmt"
+
+[tasks.test]
+description = "Run unit tests"
+run = "lua spec/run_tests.lua"
