@@ -3,7 +3,7 @@ PLUGIN = {}
 
 --- !!! MUST BE SET !!!
 PLUGIN.name = "jdtls"
-PLUGIN.version = "0.0.1"
+PLUGIN.version = "0.2.0"
 PLUGIN.homepage = "https://github.com/tinnet/vfox-jdtls"
 PLUGIN.license = "Apache 2.0"
 PLUGIN.description = "Eclipse JDT Language Server (jdtls) for Java LSP support"
