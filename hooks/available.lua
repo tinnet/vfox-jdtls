@@ -12,7 +12,7 @@ function PLUGIN:Available(ctx)
   end
 
   local result = {}
-  for version in resp.body:gmatch('href="(%d+%.%d+%.%d+)/"') do
+  for version in resp.body:gmatch('href="/jdtls/milestones/(%d+%.%d+%.%d+)"') do
     table.insert(result, { version = version, note = "" })
   end
 

@@ -17,7 +17,13 @@ function PLUGIN:PreInstall(ctx)
 
   -- Match the tarball filename (includes build timestamp)
   local pattern = '(jdt%-language%-server%-' .. version:gsub("%.", "%%.") .. '%-%d+%.tar%.gz)'
-  local filename = resp.body:match('href="' .. pattern .. '"')
+  local filename = resp.body:match("'" .. pattern .. "'")
+  if not filename then
+    filename = resp.body:match('"' .. pattern .. '"')
+  end
+  if not filename then
+    filename = resp.body:match(pattern)
+  end
   if not filename then
     error("Could not find jdtls tarball for version " .. version)
   end
