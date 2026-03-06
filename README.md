@@ -61,3 +61,7 @@ This project uses a lightweight, zero-dependency testing suite located in the `s
 ## Publishing
 
 Push a tag matching `vX.Y.Z` to trigger CI that packages and publishes the plugin.
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.

@@ -7,7 +7,7 @@ vfox plugin for installing [Eclipse JDT Language Server (jdtls)](https://github.
 ## Tech Stack
 
 - **Lua** — vfox plugin hook API
-- **hk** + **betterleaks** — pre-commit secret scanning
+- **hk** + **betterleaks** + **stylua** — pre-commit hooks (secret scanning, formatting)
 - **pkl** — hk configuration (`hk.pkl`)
 - **mise** — tool management (`mise.toml` installs hk, pkl, betterleaks)
 
@@ -19,8 +19,14 @@ hooks/
 ├── pre_install.lua     # Resolves timestamped tarball URL + SHA256
 ├── post_install.lua    # Removes Windows-only config dirs after install
 └── env_keys.lua        # Sets JDTLS_HOME and PATH
+spec/
+├── run_tests.lua       # Zero-dependency test runner
+├── spec_helper.lua     # Test helpers and vfox API stubs
+├── available_spec.lua  # Tests for version scraping
+├── pre_install_spec.lua # Tests for URL/checksum resolution
+└── env_keys_spec.lua   # Tests for environment variable setup
 metadata.lua            # Plugin name, version, manifest URL
-hk.pkl                  # Pre-commit hook config (betterleaks)
+hk.pkl                  # Pre-commit hook config (stylua + betterleaks)
 mise.toml               # Dev tool versions + tasks
 ```
 
@@ -37,9 +43,10 @@ The Eclipse download server renders HTML directory listings with **single-quoted
 ## Commands
 
 ```bash
+mise run test            # Run unit tests (lua spec/run_tests.lua)
+mise run format          # Format Lua source code (alias: fmt)
 hk check                # Run pre-commit linters manually
 mise run scan-secrets    # Deep scan full git history for secrets
-mise run format         # Format Lua source code (alias: fmt)
 ```
 
 ### Local testing
@@ -54,6 +61,12 @@ vfox install jdtls@latest
 - `.github/workflows/publish.yaml` triggers on `v*` tags (or merged PRs titled "Release vX.Y.Z")
 - Uses `version-fox/plugin-manifest-action` to publish manifest + GitHub Release
 - Tag version has `v` prefix stripped before publishing
+
+## Releasing
+
+1. Update `CHANGELOG.md` — follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format
+2. Bump `PLUGIN.version` in `metadata.lua`
+3. Commit, tag `vX.Y.Z`, push with `--tags` — CI publishes the release
 
 ## Conventions
 
