@@ -6,8 +6,9 @@ local linters = new Mapping<String, Step> {
         exclusive = true
     }
     ["stylua"] {
-        check = "stylua --check ."
-        fix = "stylua ."
+        glob = "*.lua"
+        check = "stylua --check {{files}}"
+        fix = "stylua {{files}}"
     }
 }
 
